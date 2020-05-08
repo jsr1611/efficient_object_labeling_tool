@@ -1,4 +1,4 @@
-# efficient_object_labeling_tool
+# Efficient object labeling tool
 An efficient object labeling (annotation) tool based on yolo_v3
 
 Requirements: 
