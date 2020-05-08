@@ -1,0 +1,9 @@
+# efficient_object_labeling_tool
+An efficient object labeling (annotation) tool based on yolo_v3
+
+Requirements: 
+
+Yolo v3 requirements (keras==2.2.4, tensorflow_gpu, etc. + easygui, Tk, etc.)
+Opencv
+
+
