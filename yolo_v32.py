@@ -34,7 +34,11 @@ output_path3 = ""
 id_max = 0
 status = ""  # Window status indicator, ex: Active or Inactive
 
-############ Drawing function ##################################
+"""
+Drawing function
+"""
+
+
 def drawRect(img1, img2):
     # img1 - input image with bboxes for displaying and drawing on
     # img2 - orignal image to be output with bboxes only
@@ -79,7 +83,8 @@ def drawRect(img1, img2):
         if cam2_flag == 1:  # Label tag (ID) for second camera
             print("Coor1 before labeling for second cam: \n", bboxPrev)
             while True:
-                print("\nlen(eucfind_data0) = {}, len(eucfind_data1) = {}\n".format(len(eucfind_data0), len(eucfind_data1)))
+                print("\nlen(eucfind_data0) = {}, len(eucfind_data1) = {}\n".format(len(eucfind_data0),
+                                                                                    len(eucfind_data1)))
                 try:
                     print("Label(before):", label)
                     if counter_ == 1:
@@ -132,8 +137,8 @@ def drawRect(img1, img2):
                             id_max = bboxPrev[i][1]
                     label = id_max + id_n
                     id_n += 1
-                    print("label:{},myflg3={},countr={},rm_lbl# = {}".format(label, cam2_flag, counter_,
-                                                                             len(rm_labels)))
+                    print("label:{}, myflg3={}, countr={}, rm_lbl# = {}".format(label, cam2_flag, counter_,
+                                                                                len(rm_labels)))
             else:  # when working for first frame
                 label = id_n - 1
                 id_n += 1
@@ -165,7 +170,7 @@ def drawRect(img1, img2):
                     bboxPrev, bbox, sort_flag = sortFunc(bboxPrev, bbox, sort_flag)
                     if sort_flag == False:
                         tmp_bbox = bbox
-                        #bbox = tmp_bbox[:len(coor1)]
+                        # bbox = tmp_bbox[:len(coor1)]
                         print("tmp_bbox=\n", tmp_bbox, "\n", bbox)
 
             else:  # adding bbox for first camera
@@ -214,7 +219,12 @@ def drawRect(img1, img2):
     rm_labels = []
     return img2, bbox
 
-############ Removing function  ################################
+
+""" 
+Removing function  
+"""
+
+
 def roiCUT(img1, img2):
     # img1 - input image containing bboxes for removal
     # img2 - image with no bboxes and to copy ROI from
@@ -243,7 +253,6 @@ def roiCUT(img1, img2):
         print("id area?, ", y1,y2, x1,x2)
         '''
 
-
         bbox = euc_remove(bbox, target)
         centroid_xy = []
         for i in range(len(bbox)):
@@ -260,7 +269,6 @@ def roiCUT(img1, img2):
             # bbox = euc_remove(bbox, target)
             break
     return img4
-
 
 
 class YOLO(object):
@@ -586,7 +594,7 @@ def detect_video(yolo, video_path, output_path="/home/jsr1611/PycharmProjects/ju
                         frames_total)  # Adding text to imgcopy to show updates. "Drawing is enabled..."
             # Displaying edited Yolo's result and labeling (drawing) enabled ---------------------------------------
             cv2.imshow("Label Editor", imgcopy2)
-            result, bbox = drawRect(imgcopy2, imgcopy3)     # result=newly drawn image, bbox=cur frame bbox
+            result, bbox = drawRect(imgcopy2, imgcopy3)  # result=newly drawn image, bbox=cur frame bbox
             result_tmp = result.copy()
             result_tmp2 = result.copy()
             dispay_info(result_tmp, 3, "Active", counter_,
@@ -635,14 +643,14 @@ def detect_video(yolo, video_path, output_path="/home/jsr1611/PycharmProjects/ju
                     frameNum += 1
                 else:
                     pass
-            #randomCounter_ = counter_
+            # randomCounter_ = counter_
             for l in range(interval):
                 if len(bbox) > 0:
                     for k in range(len(bbox)):
                         # Generating bboxes on an image
                         intervalVid[l] = myRect(intervalVid[l], intervalCoord, (l * len(bbox) + k))
                 if isOutput:
-                    #randomCounter_ += 1
+                    # randomCounter_ += 1
                     out2.write(intervalVid[l])
             dispay_info(result_tmp2, 3, "Inactive", counter_,
                         frames_total)  # Adding text to imgcopy to show updates. "Final result..."
@@ -743,7 +751,7 @@ def detect_video(yolo, video_path, output_path="/home/jsr1611/PycharmProjects/ju
                                     bboxNxt.append(intrpltd_box)
                                     final_xy.append(intrpltd_box)
                                     intervalCoord.append(intrpltd_box)
-                                    #print("intrpltd_box: ", intrpltd_box)
+                                    # print("intrpltd_box: ", intrpltd_box)
                                     intrpltd_box = [0, 0, (0, 0, 0, 0)]
                                 except Exception as e:
                                     print(e)
@@ -757,7 +765,7 @@ def detect_video(yolo, video_path, output_path="/home/jsr1611/PycharmProjects/ju
                                     bboxNxt.append(intrpltd_box)
                                     final_xy.append(intrpltd_box)
                                     intervalCoord.append(intrpltd_box)
-                                    #print("intrpltd_box ", intrpltd_box)
+                                    # print("intrpltd_box ", intrpltd_box)
                                     intrpltd_box = [0, 0, (0, 0, 0, 0)]
                                 except Exception as e:
                                     print(e)
@@ -769,11 +777,11 @@ def detect_video(yolo, video_path, output_path="/home/jsr1611/PycharmProjects/ju
                     if len(bbox) > 0:
                         if sort_flag and l == interval - 1:
                             for k in range(len(tmp_bbox)):
-                                #print("Line: 759 if T, myRect() call i val=", (l * len(bbox) + k))
+                                # print("Line: 759 if T, myRect() call i val=", (l * len(bbox) + k))
                                 intervalVid[l] = myRect(intervalVid[l], intervalCoord, (l * len(bbox) + k))
                         else:
                             for k2 in range(len(bbox)):
-                                #print("Line: 763 else, myRect() call i value=",(l * len(bbox) + k2))
+                                # print("Line: 763 else, myRect() call i value=",(l * len(bbox) + k2))
                                 # Generating bboxes on an image
                                 intervalVid[l] = myRect(intervalVid[l], intervalCoord, (l * len(bbox) + k2))
                     if isOutput:
