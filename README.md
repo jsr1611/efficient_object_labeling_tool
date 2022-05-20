@@ -16,5 +16,5 @@ Features
 
 Sample annotation
 
-![Sample annotation](![image_fixed_width](https://user-images.githubusercontent.com/38090036/169427873-3042ac79-4799-41b9-b2b2-90ddcecef3d3.jpg)
-)
+![Sample Image](sample_img.jpg)
+
